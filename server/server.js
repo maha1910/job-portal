@@ -32,6 +32,11 @@ const PORT = process.env.PORT || 5000
 Sentry.setupExpressErrorHandler(app);
  
 
-app.listen(PORT, () =>{
-    console.log(`Server is running on port ${PORT}`)
-})
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running locally on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
